@@ -1,0 +1,33 @@
+
+{
+  "datasets": [
+    {
+      "dataset_id": "customers",
+      "source_file": "customers.csv",
+      "expected_arrival_time": "09:00",
+      "completion_sla_minutes": 30,
+      "freshness_threshold_minutes": 1440
+    },
+    {
+      "dataset_id": "sales",
+      "source_file": "sales.csv",
+      "expected_arrival_time": "10:00",
+      "completion_sla_minutes": 30,
+      "freshness_threshold_minutes": 120
+    },
+    {
+      "dataset_id": "payments",
+      "source_file": "payments.csv",
+      "expected_arrival_time": "11:00",
+      "completion_sla_minutes": 45,
+      "freshness_threshold_minutes": 120
+    },
+    {
+      "dataset_id": "inventory",
+      "source_file": "inventory.csv",
+      "expected_arrival_time": "12:00",
+      "completion_sla_minutes": 30,
+      "freshness_threshold_minutes": 1440
+    }
+  ]
+}

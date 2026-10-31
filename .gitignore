@@ -1,0 +1,20 @@
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+venv/
+.venv/
+
+# Environment variables and secrets
+.env
+.env.*
+
+# Local database
+data/*.db
+data/*.sqlite
+data/*.sqlite3
+
+# Generated reports
+reports/*.csv
+reports/*.json
