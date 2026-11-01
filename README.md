@@ -1,98 +1,100 @@
-# Dataset SLA Monitoring & Data Freshness Alerting System
+# FreshPulse – Dataset SLA Monitoring & Data Freshness Alerting System
 
 ## 1. Project Overview
 
-The **Dataset SLA Monitoring & Data Freshness Alerting System** is a Python-based Data Engineering project designed to monitor dataset arrivals, data processing completion times, data quality, and data freshness.
+FreshPulse is a Python-based Data Engineering project that monitors dataset arrivals, processing times, data quality, and data freshness.
 
-In real-world data engineering environments, data pipelines are expected to receive and process data within specific time limits. If a dataset arrives late, contains invalid records, or is not updated on time, it can affect downstream applications, reports, and business decisions.
+In real-world applications, data must arrive and be processed within expected time limits. When data is delayed, missing, outdated, or contains incorrect records, it can affect reports and business decisions.
 
-This project addresses these problems by building an automated monitoring system that:
+FreshPulse helps identify these problems through automated data validation, pipeline monitoring, SLA tracking, and alert generation.
 
-- Generates synthetic datasets for testing.
-- Validates incoming records against predefined schemas.
-- Identifies duplicate and invalid records.
-- Stores rejected records with their rejection reasons.
-- Monitors dataset arrival and processing deadlines.
-- Detects late, missing, and stale datasets.
-- Generates event-level and dataset-level SLA alerts.
-- Maintains pipeline execution history.
-- Produces CSV and JSON monitoring reports.
-- Displays pipeline health and monitoring results through an interactive dashboard.
+The project also includes an interactive dashboard that allows users to view pipeline status, data quality information, SLA alerts, and monitoring reports in one place.
 
-The backend is developed using **Python and SQLite**, while the interactive dashboard is developed using **Streamlit, Pandas, and Plotly**.
+## 2. Project Objectives
 
----
+The main objectives of this project are:
 
-## 2. Purpose of the Project
-
-The main purpose of this project is to understand how data engineering teams monitor the reliability and quality of data pipelines.
-
-It focuses on solving the following real-world problems:
-
-1. **Late Data Arrival:** Identify when a dataset does not arrive within its expected schedule.
-2. **Data Freshness:** Check whether the latest available data is up to date.
-3. **Data Quality:** Identify missing fields, invalid values, and incorrect records.
-4. **Duplicate Detection:** Prevent duplicate events from being processed multiple times.
-5. **SLA Monitoring:** Check whether datasets meet their arrival and processing deadlines.
-6. **Alert Management:** Generate alerts when datasets violate their configured SLAs.
-7. **Pipeline Tracking:** Maintain execution history and record processing statistics.
-8. **Visual Monitoring:** Provide an interactive dashboard to understand pipeline health without manually checking database tables.
-
----
+- Monitor whether datasets arrive on time.
+- Check whether data processing is completed within the expected deadline.
+- Identify missing, invalid, and duplicate records.
+- Track rejected records and their reasons.
+- Monitor dataset freshness and SLA violations.
+- Generate automated monitoring reports.
+- Maintain pipeline execution history.
+- Display pipeline information through an interactive dashboard.
 
 ## 3. Technologies Used
 
 | Technology | Purpose |
-| Python | Core programming language and pipeline development |
-| SQLite | Database for storing datasets, events, pipeline runs, and alerts |
-| Pandas | Data processing and dashboard data handling |
-| Streamlit | Building the interactive monitoring dashboard |
-| Plotly | Interactive charts and visualizations |
-| CSV | Input datasets and exported reports |
-| JSON | Dataset configuration and summary reports |
-| Pytest | Unit testing and integration testing |
-| Git & GitHub | Version control and project hosting |
+| Python | Develop the data processing and monitoring system |
+| SQLite | Store datasets, processing history, and alerts |
+| Pandas | Process and analyze data |
+| Streamlit | Build the interactive dashboard |
+| Plotly | Display interactive charts |
+| CSV | Store input datasets and reports |
+| JSON | Manage configurations and summary reports |
+| Pytest | Test project functionality |
+| Git & GitHub | Manage and maintain source code |
 
-### Python Libraries
+## 4. How the Project Works
 
-- sqlite3
-- csv
-- json
-- uuid
-- datetime
-- pathlib
-- pandas
-- streamlit
-- plotly
-- pytest
+The project follows a simple data processing workflow:
 
----
+1. **Generate Data:** Create sample CSV datasets for testing.
+2. **Validate Data:** Check incoming records for missing or invalid values.
+3. **Detect Duplicates:** Identify records that have already been processed.
+4. **Store Data:** Save valid and rejected records in the SQLite database.
+5. **Monitor SLAs:** Check dataset arrival, processing deadlines, and freshness.
+6. **Generate Alerts:** Identify missing datasets, late arrivals, and SLA violations.
+7. **Generate Reports:** Export monitoring results into CSV and JSON files.
+8. **View Dashboard:** Display pipeline health and monitoring results using Streamlit.
 
-## 4. Project Architecture
+## 5. Project Architecture
 
-The project follows a modular architecture.
-
-**Overall workflow:**
-
-Synthetic Data Generation → Schema Validation → Data Ingestion → SQLite Database → SLA Monitoring → Alert Generation → Report Generation → Streamlit Dashboard
+FreshPulse uses a modular architecture. Each Python file is responsible for a specific task.
 
 ### Module Description
 
-| Module | Responsibility |
+| Module | Description |
 | `database.py` | Creates and manages the SQLite database |
-| `validate.py` | Validates incoming datasets and records |
-| `ingest.py` | Processes CSV files and stores accepted/rejected records |
-| `sla_monitor.py` | Evaluates arrival, completion, and freshness SLAs |
-| `pipeline.py` | Coordinates the pipeline execution |
+| `validate.py` | Validates incoming data and checks records |
+| `ingest.py` | Reads CSV files and processes incoming records |
+| `sla_monitor.py` | Monitors dataset arrival, processing deadlines, and freshness |
+| `pipeline.py` | Coordinates the complete data processing workflow |
 | `dashboard.py` | Displays monitoring information through Streamlit |
 | `generate_data.py` | Generates synthetic datasets for testing |
 
----
-
-## 5. Project Structure
+### Project Workflow
 
 ```text
-Dats-Engineering-Project/
+Synthetic Data Generation
+          |
+          v
+     Data Validation
+          |
+          v
+     Data Ingestion
+          |
+          v
+     SQLite Database
+          |
+          v
+     SLA Monitoring
+          |
+          v
+     Alert Generation
+          |
+          v
+    Report Generation
+          |
+          v
+   Streamlit Dashboard
+```
+
+## 6. Project Folder Structure
+
+```text
+freshpulse-data-monitoring/
 │
 ├── config/
 │   └── datasets.json
@@ -121,139 +123,42 @@ Dats-Engineering-Project/
 │   ├── test_sla_monitor.py
 │   └── test_pipeline.py
 │
-├── reports/
-│   ├── sla_report.csv
-│   ├── pipeline_summary.json
-│   └── rejected_records.csv
-│
 ├── docs/
 │   ├── architecture.md
 │   ├── data_dictionary.md
 │   └── sql_queries.md
+│
+├── reports/
+│   ├── sla_report.csv
+│   ├── pipeline_summary.json
+│   └── rejected_records.csv
 │
 ├── requirements.txt
 ├── .gitignore
 └── README.md
 ```
 
----
-
-## 6. Dashboard Module
-
-The project includes an interactive dashboard developed using Streamlit.
-
-**Dashboard file:** `src/dashboard.py`
-
-The dashboard reads information from the SQLite database (`data/monitoring.db`) and generated reports in the `reports/` directory.
-
-It helps users understand the health of the data pipeline through visual summaries, charts, tables, and monitoring information.
-
-### Dashboard Pages
-
-#### 1. Overview
-
-Provides a high-level summary of the complete data pipeline.
-
-Displays:
-
-- Total datasets.
-- Total processed records.
-- Accepted records.
-- Rejected records.
-- SLA alerts.
-- Overall pipeline health.
-- Monitoring charts.
-
-#### 2. Pipeline Runs
-
-Displays pipeline execution history.
-
-Includes:
-
-- Pipeline run details.
-- Execution timestamps.
-- Processing status.
-- Record counts.
-- Pipeline execution history.
-
-#### 3. Data Quality
-
-Helps identify the quality of incoming datasets.
-
-Displays:
-
-- Accepted records.
-- Rejected records.
-- Duplicate records.
-- Validation failures.
-- Rejection reasons.
-- Data quality summaries.
-
-#### 4. SLA Monitoring
-
-Monitors dataset arrival and freshness conditions.
-
-Displays:
-
-- Dataset arrival status.
-- Processing completion status.
-- SLA deadlines.
-- Freshness status.
-- Event-level alerts.
-- Dataset-level alerts.
-- Alert severity and status.
-
-#### 5. Test Results
-
-Provides an option to execute the automated Pytest test suite from the dashboard.
-
-Displays test execution results to help understand whether the project modules are functioning correctly.
-
-#### 6. Reports
-
-Provides access to the generated monitoring reports.
-
-Available reports:
-
-- `sla_report.csv`
-- `pipeline_summary.json`
-- `rejected_records.csv`
-
-### Run the Dashboard
-
-After initializing the database and generating the reports, execute:
-
-```powershell
-python -m streamlit run src/dashboard.py
-```
-
-Streamlit starts the dashboard locally and provides a URL, usually:
-
-```text
-http://localhost:8501
-```
-
-Open the URL in your browser to access the monitoring dashboard.
-
----
-
 ## 7. Installation and Setup
 
-Follow these steps to run the project on a Windows machine using PowerShell.
+Follow these steps to download and run FreshPulse on a Windows machine.
 
-### Step 1: Clone the Repository
+### Step 1: Clone the GitHub Repository
+
+Open PowerShell or the VS Code terminal.
 
 ```powershell
-git clone https://github.com/Dharani154/YOUR-REPOSITORY.git
+git clone https://github.com/Dharani154/freshpulse-data-monitoring.git
 ```
 
 Navigate to the project directory:
 
 ```powershell
-cd Dats-Engineering-Project
+cd freshpulse-data-monitoring
 ```
 
 ### Step 2: Create a Virtual Environment
+
+A virtual environment keeps the project's Python dependencies separate from other projects.
 
 ```powershell
 python -m venv venv
@@ -265,62 +170,66 @@ Activate the virtual environment:
 .\venv\Scripts\Activate.ps1
 ```
 
-### Step 3: Install Dependencies
+If PowerShell blocks script execution, run:
+
+```powershell
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+```
+
+Then activate the environment again.
+
+### Step 3: Install Dependencies for the First Run
+
+Install the required Python libraries:
 
 ```powershell
 pip install -r requirements.txt
 ```
 
-The project uses Pandas, Streamlit, Plotly, and Pytest along with Python's built-in libraries.
-
-If you need to install the dashboard dependencies separately:
+The main external libraries used are:
 
 ```powershell
-pip install streamlit pandas plotly
+pip install pandas streamlit plotly pytest
 ```
 
-### Step 4: Save Dependencies
-
-After installing the required libraries, update the requirements file:
+### Step 4: Check Installed Packages
 
 ```powershell
-pip freeze > requirements.txt
+pip list
 ```
 
----
+This displays the installed Python packages.
 
 ## 8. Database Initialization
 
-Initialize the SQLite database:
+FreshPulse uses SQLite to store processed records, rejected records, pipeline history, and SLA alerts.
+
+Initialize the database:
 
 ```powershell
 python -m src.database
 ```
 
-This creates the database and the required tables.
-
-**Database location:**
+The database is stored at:
 
 ```text
 data/monitoring.db
 ```
 
-The database stores:
+The database contains information about:
 
 - Dataset configurations.
-- Accepted events.
+- Accepted records.
 - Rejected records.
 - Pipeline execution history.
-- SLA monitoring information.
+- SLA monitoring results.
 - Event-level and dataset-level alerts.
-
----
 
 ## 9. Generate Synthetic Data
 
-The project uses synthetic CSV datasets instead of real business data.
+The project uses synthetic CSV datasets for testing instead of real business data.
 
-This allows repeatable testing without depending on external data sources.
+This helps test the pipeline with different record volumes.
 
 ### Generate 20 Records Per Dataset
 
@@ -340,94 +249,185 @@ python scripts/generate_data.py --count 100 --seed 42
 python scripts/generate_data.py --count 25000 --seed 42
 ```
 
-The generator also creates additional test records to exercise validation and duplicate detection.
+**Understanding the command:**
 
-The `--seed 42` option helps generate repeatable synthetic data.
+- `--count`: Number of normal records to generate per configured dataset.
+- `--seed 42`: Uses a fixed random seed to make test data generation repeatable.
 
-Generated files are stored in:
+The generator also creates additional test records for validation and duplicate detection.
+
+Generated CSV files are stored in:
 
 ```text
 data/input/
 ```
 
----
+## 10. Data Ingestion and Validation
 
-## 10. Run the Data Ingestion Process
+The ingestion module reads generated CSV files, validates records, and stores the results in SQLite.
 
-Execute:
+Run the ingestion module:
 
 ```powershell
 python -m src.ingest
 ```
 
-The ingestion module:
+The ingestion process performs the following operations:
 
 1. Reads CSV files from the input directory.
 2. Checks records against the configured schema.
-3. Identifies missing or invalid values.
+3. Identifies missing and invalid values.
 4. Detects duplicate events.
-5. Stores valid records in SQLite.
-6. Tracks rejected records and their rejection reasons.
+5. Stores valid records in the database.
+6. Tracks rejected records with their rejection reasons.
 
-This ensures that only valid records are accepted into the processing database.
+This helps maintain data quality before records are used for further processing.
 
----
+## 11. SLA Monitoring
 
-## 11. Run SLA Monitoring
+SLA stands for **Service Level Agreement**.
 
-Execute:
+In this project, an SLA defines the expected time by which a dataset should arrive or complete processing.
+
+The monitoring module checks whether datasets meet these expected time limits.
+
+Run SLA monitoring:
 
 ```powershell
-python src/sla_monitor.py --as-of "2026-10-30T23:59:00+05:30"
+python src/sla_monitor.py --as-of "2026-11-01T23:59:00+05:30"
 ```
 
-The `--as-of` parameter specifies the reference date and time used for SLA evaluation.
+The `--as-of` parameter specifies the reference date and time for SLA evaluation.
 
-The `+05:30` timezone represents Indian Standard Time (IST).
+The `+05:30` represents Indian Standard Time (IST).
 
-The monitoring module checks:
+Replace the example timestamp with the required monitoring reference time when running another test.
+
+### What Does SLA Monitoring Check?
 
 - Expected dataset arrival time.
 - Actual dataset arrival time.
 - Processing completion deadline.
 - Dataset freshness.
 - Missing datasets.
-- Late arrivals.
+- Late data arrivals.
 - SLA violations.
 
-It generates alerts when configured SLA conditions are violated.
-
-Replace the example timestamp with the required monitoring reference time when performing another test.
-
----
+When a dataset does not meet its configured SLA, the system generates an appropriate alert.
 
 ## 12. Run the Complete Pipeline
 
-The project also provides a pipeline execution module.
+FreshPulse provides a pipeline module to coordinate the complete processing workflow.
 
-For a standard run:
+### Standard Execution
 
 ```powershell
 python -m src.pipeline --count 100 --seed 42
 ```
 
-For a large-volume run:
+### Large-Volume Execution
 
 ```powershell
 python -m src.pipeline --count 25000 --seed 42
 ```
 
-The complete pipeline coordinates the required processing stages, including database initialization, synthetic data generation, ingestion, monitoring, and report generation as configured.
+The pipeline coordinates the configured processing stages:
 
-Use a clean test database when benchmarking repeated runs because previously processed event IDs may be identified as duplicates.
+1. Database initialization.
+2. Synthetic data generation.
+3. Data ingestion.
+4. Data validation.
+5. SLA monitoring.
+6. Report generation.
 
----
+This provides a convenient way to execute the complete workflow.
 
-## 13. Generate and View Reports
+**Note:** The pipeline should be used as the main execution method for a complete run. Avoid running data generation and ingestion separately immediately before it unless you intentionally want to test those modules individually. Reusing existing event IDs can result in duplicate-record rejections.
 
-The project generates reports in the `reports/` directory.
+## 13. Interactive Monitoring Dashboard
 
-### SLA Report
+FreshPulse includes an interactive dashboard built using Streamlit, Pandas, and Plotly.
+
+The dashboard reads monitoring information from the SQLite database and generated reports.
+
+It helps users understand the condition of their data pipeline without manually checking database tables.
+
+### Dashboard Sections
+
+**1. Overview**
+Displays a summary of the complete pipeline.
+
+- Total datasets.
+- Processed records.
+- Accepted records.
+- Rejected records.
+- SLA alerts.
+- Overall pipeline status.
+- Monitoring charts.
+
+**2. Pipeline Runs**
+Displays pipeline execution history.
+
+- Pipeline run details.
+- Execution timestamps.
+- Processing status.
+- Record counts.
+
+**3. Data Quality**
+Helps understand the quality of incoming records.
+
+- Accepted records.
+- Rejected records.
+- Duplicate records.
+- Validation failures.
+- Rejection reasons.
+
+**4. SLA Monitoring**
+Displays dataset monitoring information.
+
+- Dataset arrival status.
+- Processing completion status.
+- SLA deadlines.
+- Data freshness.
+- Event-level alerts.
+- Dataset-level alerts.
+- Alert severity and status.
+
+**5. Test Results**
+Provides access to automated test execution and test results.
+
+**6. Reports**
+Displays the available monitoring reports.
+
+- SLA report.
+- Pipeline summary.
+- Rejected records report.
+
+### Start the Dashboard
+
+Run the following command:
+
+```powershell
+python -m streamlit run src/dashboard.py
+```
+
+After starting Streamlit, open the following URL in your browser:
+
+```text
+http://localhost:8501
+```
+
+The dashboard will display the latest available monitoring information.
+
+**Important:** Run the pipeline first so that the database and reports contain information for the dashboard to display.
+
+## 14. Generated Reports
+
+FreshPulse automatically generates monitoring reports in the `reports/` directory.
+
+### 1. SLA Report
+
+File:
 
 ```text
 reports/sla_report.csv
@@ -435,31 +435,53 @@ reports/sla_report.csv
 
 Contains dataset arrival, processing completion, freshness, and SLA monitoring results.
 
-### Pipeline Summary
+### 2. Pipeline Summary
+
+File:
 
 ```text
 reports/pipeline_summary.json
 ```
 
-Contains pipeline execution information and data-quality statistics.
+Contains pipeline execution details and data-quality statistics.
 
-### Rejected Records
+### 3. Rejected Records
+
+File:
 
 ```text
 reports/rejected_records.csv
 ```
 
-Contains rejected records along with their rejection reasons.
+Contains rejected records along with the reasons they were rejected.
 
-These reports can be used for further analysis and displayed through the dashboard.
+These reports help users understand pipeline performance and data quality.
 
----
+## 15. Database Inspection
 
-## 14. Run Automated Tests
+You can inspect the SQLite database using Python.
 
-The project uses Pytest for unit and integration testing.
+For example, to view dataset-level SLA alerts:
 
-Run all tests:
+```powershell
+python -c "import sqlite3; c=sqlite3.connect('data/monitoring.db'); print(*c.execute('SELECT dataset_id, alert_type, severity, alert_status, deadline FROM dataset_sla_alerts'), sep='\n'); c.close()"
+```
+
+This command displays:
+
+- Dataset ID.
+- Alert type.
+- Alert severity.
+- Alert status.
+- SLA deadline.
+
+The database can also be explored using an SQLite database viewer or Python SQL queries.
+
+## 16. Run Automated Tests
+
+FreshPulse uses Pytest to verify that the project modules work correctly.
+
+Run all automated tests:
 
 ```powershell
 python -m pytest -v
@@ -471,11 +493,11 @@ Run tests from the tests directory:
 python -m pytest tests -v
 ```
 
-The recorded test result was:
+The previously recorded test result was:
 
 **27 tests passed in 0.52 seconds.**
 
-The test suite checks:
+The test suite covers:
 
 - Schema validation.
 - Record validation.
@@ -485,117 +507,114 @@ The test suite checks:
 - SLA calculations.
 - Pipeline functionality.
 
-Rerun the tests before submission to confirm the latest results.
+Run the tests again after making code changes to verify the latest results.
 
----
+## 17. Complete Command Execution Guide
 
-## 15. Complete Command Execution Order
+For beginners, the following is the recommended command order for the first execution.
 
-For someone running this project for the first time, follow this command sequence.
-
-### Initial Setup
+### Step 1: Clone the Repository
 
 ```powershell
-git clone https://github.com/Dharani154/YOUR-REPOSITORY.git
+git clone https://github.com/Dharani154/freshpulse-data-monitoring.git
 
-cd Dats-Engineering-Project
+cd freshpulse-data-monitoring
+```
 
+### Step 2: Create and Activate Virtual Environment
+
+```powershell
 python -m venv venv
 
 .\venv\Scripts\Activate.ps1
+```
 
+### Step 3: Install Dependencies
+
+```powershell
 pip install -r requirements.txt
 ```
 
-### Initialize and Process Data
+### Step 4: Initialize the Database
 
 ```powershell
 python -m src.database
-
-python scripts/generate_data.py --count 100 --seed 42
-
-python -m src.ingest
-
-python src/sla_monitor.py --as-of "2026-10-30T23:59:00+05:30"
 ```
 
-### Execute Automated Tests
+### Step 5: Run the Complete Pipeline
+
+```powershell
+python -m src.pipeline --count 100 --seed 42
+```
+
+### Step 6: Execute Automated Tests
 
 ```powershell
 python -m pytest -v
 ```
 
-### Launch the Dashboard
+### Step 7: Start the Dashboard
 
 ```powershell
 python -m streamlit run src/dashboard.py
 ```
 
-Open:
+### Step 8: Open the Dashboard
 
 ```text
 http://localhost:8501
 ```
 
-**Important:** Run database initialization, data generation, ingestion, and monitoring before launching the dashboard so that it has data to display.
+You can now explore the pipeline information, data quality, SLA alerts, and generated reports.
 
-For subsequent runs, avoid generating the same event IDs into an existing database unless you intentionally want to test duplicate detection.
+## 18. What I Learned
 
----
+While developing FreshPulse, I gained practical experience in:
 
-## 16. What I Learned From This Project
-
-Through this project, I gained practical experience in:
-
-- Building a modular Python data engineering application.
-- Working with CSV and JSON data.
-- Designing and managing SQLite databases.
-- Implementing schema and record validation.
-- Handling duplicate and rejected records.
-- Understanding data ingestion workflows.
-- Implementing dataset freshness monitoring.
-- Working with event-level and dataset-level SLAs.
-- Generating automated monitoring reports.
+- Python programming and modular application development.
+- Working with CSV and JSON files.
+- SQLite database creation and management.
+- Data ingestion and validation.
+- Duplicate detection and error handling.
+- Data quality monitoring.
+- Dataset freshness and SLA monitoring.
+- Generating automated reports.
 - Building interactive dashboards using Streamlit.
-- Creating visualizations using Plotly.
+- Creating charts using Plotly.
 - Writing unit and integration tests using Pytest.
-- Testing pipelines with synthetic datasets of different sizes.
+- Working with Git and GitHub for version control.
 
----
+## 19. Future Improvements
 
-## 17. Limitations and Future Improvements
+Some improvements planned for future versions include:
 
-Possible improvements for future versions include:
-
-- Implement automated alert closure and recovery handling.
-- Integrate email or messaging notifications for critical SLA violations.
-- Add scheduled pipeline execution.
-- Improve schema evolution and partial-failure handling.
-- Expand large-volume performance benchmarking.
+- Add email notifications for critical SLA alerts.
+- Implement automatic alert closure and recovery tracking.
 - Add historical SLA trend analysis.
+- Support scheduled pipeline execution.
+- Improve handling of schema changes and partial failures.
+- Add more performance testing for large datasets.
 - Introduce role-based dashboard access.
-- Integrate cloud-based data storage and monitoring.
+- Explore cloud-based data storage and monitoring.
 
----
+## 20. Conclusion
 
-## 18. Conclusion
+FreshPulse demonstrates how data engineering concepts can be used to build a data pipeline monitoring solution.
 
-The Dataset SLA Monitoring & Data Freshness Alerting System demonstrates how data engineering teams can monitor dataset reliability, data quality, and pipeline performance.
+The project combines Python, SQLite, data validation, SLA monitoring, automated reporting, and an interactive Streamlit dashboard to help identify data quality issues and monitor dataset reliability.
 
-By combining Python, SQLite, automated validation, SLA monitoring, reporting, and an interactive Streamlit dashboard, the project provides an end-to-end example of a data pipeline monitoring solution.
+Through this project, I gained practical experience in data ingestion, database management, pipeline monitoring, automated testing, and data visualization.
 
-It demonstrates practical knowledge of data ingestion, database management, data quality checks, monitoring, alerting, testing, and dashboard development.
+**Project Name:** FreshPulse
 
 **Project Type:** Data Engineering / Data Quality / Pipeline Monitoring
-**Primary Language:** Python
+
+**Programming Language:** Python
+
 **Database:** SQLite
+
 **Dashboard:** Streamlit
-**Testing:** Pytest
 
-## Conclusion
+**Testing Framework:** Pytest
 
-The Dataset SLA Monitoring & Data Freshness Alerting System demonstrates an end-to-end approach to monitoring data pipeline reliability, data quality, and dataset freshness.
-
-By using Python, SQLite, Pandas, and Streamlit, the project automates data ingestion, record validation, duplicate detection, SLA monitoring, alert generation, and report creation. The interactive dashboard provides a clear view of pipeline execution, data quality, SLA violations, and monitoring results.
-
-This project helped me gain practical experience in Data Engineering concepts, database management, data validation, pipeline monitoring, automated testing, and dashboard development.
+**Repository:** <https://github.com/Dharani154/freshpulse-data-monitoring>
